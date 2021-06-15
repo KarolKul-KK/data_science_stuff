@@ -1,0 +1,47 @@
+Deep learning models stand for a new learning paradigm in artificial intelligence (AI) and machine learning. Recent breakthrough results in image analysis and speech recognition have generated a massive interest in this field because also applications in many other domains providing big data seem possible. On a downside, the mathematical and computational methodology underlying deep learning models is very challenging, especially for interdisciplinary scientists. For this reason, we present in this paper an introductory review of deep learning approaches including Deep Feedforward Neural Networks (D-FFNN), Convolutional Neural Networks (CNNs), Deep Belief Networks (DBNs), Autoencoders (AEs), and Long Short-Term Memory (LSTM) networks. These models form the major core architectures of deep learning models currently used and should belong in any data scientist's toolbox. Importantly, those core architectural building blocks can be composed flexibly—in an almost Lego-like manner—to build new application-specific network architectures. Hence, a basic understanding of these network architectures is important to be prepared for future developments in AI.
+
+1. Introduction
+We are living in the big data era where all areas of science and industry generate massive amounts of data. This confronts us with unprecedented challenges regarding their analysis and interpretation. For this reason, there is an urgent need for novel machine learning and artificial intelligence methods that can help in utilizing these data. Deep learning (DL) is such a novel methodology currently receiving much attention (Hinton et al., 2006). DL describes a family of learning algorithms rather than a single method that can be used to learn complex prediction models, e.g., multi-layer neural networks with many hidden units (LeCun et al., 2015). Importantly, deep learning has been successfully applied to several application problems. For instance, a deep learning method set the record for the classification of handwritten digits of the MNIST data set with an error rate of 0.21% (Wan et al., 2013). Further application areas include image recognition (Krizhevsky et al., 2012a; LeCun et al., 2015), speech recognition (Graves et al., 2013), natural language understanding (Sarikaya et al., 2014), acoustic modeling (Mohamed et al., 2011) and computational biology (Leung et al., 2014; Alipanahi et al., 2015; Zhang S. et al., 2015; Smolander et al., 2019a,b).
+
+Models of artificial neural networks have been used since about the 1950s (Rosenblatt, 1957); however, the current wave of deep learning neural networks started around 2006 (Hinton et al., 2006). A common characteristic of the many variations of supervised and unsupervised deep learning models is that these models have many layers of hidden neurons learned, e.g., by a Restricted Boltzmann Machine (RBM) in combination with Backpropagation and error gradients of the Stochastic Gradient Descent (Riedmiller and Braun, 1993). Due to the heterogeneity of deep learning approaches a comprehensive discussion is very challenging, and for this reason, previous reviews aimed at dedicated sub-topics. For instance, a bird's eye view without detailed explanations can be found in LeCun et al. (2015), a historic summary with many detailed references in Schmidhuber (2015) and reviews about application domains, e.g., image analysis (Rawat and Wang, 2017; Shen et al., 2017), speech recognition (Yu and Li, 2017), natural language processing (Young et al., 2018), and biomedicine (Cao et al., 2018).
+
+In contrast, our review aims at an intermediate level, providing also technical details usually omitted. Given the interdisciplinary interest in deep learning, which is part of data science (Emmert-Streib and Dehmer, 2019a), this makes it easier for people new to the field to get started. The topics we selected are focused on the core methodology of deep learning approaches including Deep Feedforward Neural Networks (D-FFNN), Convolutional Neural Networks (CNNs), Deep Belief Networks (DBNs), Autoencoders (AEs), and Long Short-Term Memory (LSTM) networks. Further network architectures which we discuss help in understanding these core approaches.
+
+This paper is organized as follows. In the section 2, we provide a historical overview of general developments of neural networks. Then in section 3, we discuss major architectures distinguishing neural networks. Thereafter, we discuss Deep Feedforward Neural Networks (section 4), Convolutional Neural Networks (section 5), Deep Belief Networks (section 6), Autoencoders (section 7) and Long Short-Term Memory networks (section 8) in detail. In section 9, we provide a discussion of important issues when learning neural network models. Finally, this paper finishes in section 10 with conclusions.
+
+2. Key Developments of Neural Networks: A Time Line
+The history of neural networks is long, and many people have contributed toward their development over the decades. Given the recent explosion of interest in deep learning, it is not surprising that the assignment of credit for key developments is not uncontroversial. In the following, we were aiming at an unbiased presentation highlighting only the most distinguished contributions.
+
+In 1943
+, the first mathematical model of a neuron was created by McCulloch and Pitts (1943). This model aimed at providing an abstract formulation for the functioning of a neuron without mimicking the biophysical mechanism of a real biological neuron. It is interesting to note that this model did not consider learning.
+
+In 1949
+, the first idea about biologically motivated learning in neural networks was introduced by Hebb (1949). Hebbian learning is a form of unsupervised learning of neural networks.
+
+In 1957
+, the Perceptron was introduced by Rosenblatt (1957). The Perceptron is a single-layer neural network serving as a linear binary classifier. In the modern language of ANNs, a Perceptron uses the Heaviside function as an activation function (see Table 1).
+
+TABLE 1
+ www.frontiersin.org
+Table 1. An overview of frequently used activation functions for neuron models.
+
+In 1960
+, the Delta Learning rule for learning a Perceptron was introduced by Widrow and Hoff (1960). The Delta Learning rule, also known as Widrow & Hoff Learning rule or the Least Mean Square rule, is a gradient descent learning rule for updating the weights of the neurons. It is a special case of the backpropagation algorithm.
+
+In 1968
+, a method called Group Method of Data Handling (GMDH) for training neural networks was introduced by Ivakhnenko (1968). These networks are widely considered the first deep learning networks of the Feedforward Multilayer Perceptron type. For instance, the paper (Ivakhnenko, 1971) used a deep GMDH network with 8 layers. Interestingly, the numbers of layers and units per layer could be learned and were not fixed from the beginning.
+
+In 1969
+, an important paper by Minsky and Papert (1969) was published which showed that the XOR problem cannot be learned by a Perceptron because it is not linearly separable. This triggered a pause phase for neural networks called the “AI winter.”
+
+In 1974
+, error backpropagation (BP) has been suggested to use in neural networks (Werbos, 1974) for learning the weighted in a supervised manner and applied in Werbos (1981). However, the method itself is older (see e.g., Linnainmaa, 1976).
+
+In 1980
+, a hierarchical multilayered neural network for visual pattern recognition called Neocognitron was introduced by Fukushima (1980). After the deep GMDH networks (see above), the Neocognitron is considered the second artificial NN that deserved the attribute deep. It introduced convolutional NNs (today called CNNs). The Neocognitron is very similar to the architecture of modern, supervised, deep Feedforward Neural Networks (D-FFNN) (Fukushima, 2013).
+
+In 1982
+, Hopfield introduced a content-addressable memory neural network, nowadays called Hopfield Network (Hopfield, 1982). Hopfield Networks are an example for recurrent neural networks.
+
+In 1986
+, backpropagation reappeared in a paper by Rumelhart et al. (1986). They 
